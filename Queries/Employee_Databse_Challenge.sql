@@ -46,3 +46,21 @@ ON e.emp_no = ti.emp_no
 WHERE (de.to_date = '9999-01-01')
 	AND (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
 ORDER BY emp_no;
+
+SELECT COUNT(me.title), title
+INTO mentorship_titles
+FROM mentorship_eligibility as me
+GROUP BY me.title 
+ORDER BY count DESC;
+
+DROP TABLE if exists promotion_eligibility
+
+SELECT COUNT(ti.title), title
+INTO promotion_eligibility
+FROM titles as ti
+INNER JOIN employees as e
+ON ti.emp_no = e.emp_no
+WHERE (hire_date BETWEEN '1987-01-01' AND '2000-12-31')
+	AND ti.to_date = ('9999-01-01')
+GROUP BY ti.title
+ORDER BY count DESC;
